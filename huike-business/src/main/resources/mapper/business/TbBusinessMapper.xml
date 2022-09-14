@@ -35,6 +35,8 @@
         <result property="nextTime"    column="next_time"    />
         <result property="status"    column="status"    />
         <result property="clue_id"    column="clueId"    />
+        <result property="beginCreateTime"    column="beginCreateTime"    />
+        <result property="endCreateTime"    column="endCreateTime"    />
     </resultMap>
 
     <resultMap type="TbBusiness" id="TbBusinessAssignResult">
@@ -117,6 +119,7 @@
             <if test="planTime != null "> and plan_time = #{planTime}</if>
             <if test="otherIntention != null  and otherIntention != ''"> and other_intention = #{otherIntention}</if>
             <if test="nextTime != null "> and next_time = #{nextTime}</if>
+            <if test="beginCreateTime != null and beginCreateTime != '' ">and create_time BETWEEN #{beginCreateTime} and #{endCreateTime}</if>
             and status IN ('3','4')
         </where>
     </select>
@@ -153,6 +156,10 @@
             AND (r.latest = '1' OR r.id IS NULL)
             AND (r.type = '1' OR r.id IS NULL)
         </where>
+        <!-- 状态 -->
+        <if test="status != null and status != ''">
+            AND b.status=#{status}
+        </if>
         <!-- 数据范围过滤 -->
         <if test="params.dataScope != null and params.dataScope != ''">
             AND (${params.dataScope} OR r.id IS NULL)
