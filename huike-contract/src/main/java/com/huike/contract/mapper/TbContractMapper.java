@@ -3,9 +3,11 @@ package com.huike.contract.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.collect.Maps;
 import com.huike.clues.domain.vo.IndexStatisticsVo;
 import com.huike.contract.domain.TbContract;
 import org.apache.ibatis.annotations.Param;
+import org.apache.poi.ss.formula.functions.T;
 
 /**
  * 合同Mapper接口
@@ -73,6 +75,13 @@ public interface TbContractMapper {
      */
     public List<Map<String,Object>> salesStatistics(@Param("beginCreateTime") String beginCreateTime, @Param("endCreateTime") String endCreateTime);
 
+    /**
+     * 学科统计
+     * @param beginCreateTime
+     * @param endCreateTime
+     * @return
+     */
+    public List<Map<String,Object>> subjectStatistics(@Param("beginCreateTime") String beginCreateTime, @Param("endCreateTime") String endCreateTime);
     /**
      * 渠道统计
      * @param beginCreateTime

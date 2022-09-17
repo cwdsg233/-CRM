@@ -49,7 +49,16 @@ public class ReportController extends BaseController {
         return reportService.salesStatistics(beginCreateTime,endCreateTime);
     }
 
-
+    /**
+     * 学科分布统计
+     * @param beginCreateTime
+     * @param endCreateTime
+     * @return
+     */
+    @GetMapping("/subjectStatistics/{beginCreateTime}/{endCreateTime}")
+    public AjaxResult subjectStatistics(@PathVariable String beginCreateTime, @PathVariable String endCreateTime){
+        return AjaxResult.success(reportService.subjectStatistics(beginCreateTime,endCreateTime));
+    }
 
     /**
      * 渠道统计
@@ -136,6 +145,19 @@ public class ReportController extends BaseController {
         List<TbClue> list= reportService.cluesStatisticsList(clue);
         return getDataTable(list);
     }
+
+
+    /**
+     * 线索统计
+     * @param beginCreateTime
+     * @param endCreateTime
+     * @return
+     */
+    @GetMapping("/cluesStatistics/{beginCreateTime}/{endCreateTime}")
+    public LineChartVO cluesStatistics(@PathVariable String beginCreateTime, @PathVariable String endCreateTime){
+        return reportService.cluesStatistics(beginCreateTime,endCreateTime);
+    }
+
 
     /**
      * 活动渠道统计

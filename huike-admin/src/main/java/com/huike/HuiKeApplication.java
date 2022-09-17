@@ -20,8 +20,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 public class HuiKeApplication implements CommandLineRunner {
 
-    @Autowired
-    private ITbActivityService activityService;
+    //@Autowired
+    //private ITbActivityService activityService;
 
     public static void main(String[] args){
         SpringApplication.run(HuiKeApplication.class, args);
@@ -31,7 +31,7 @@ public class HuiKeApplication implements CommandLineRunner {
     public void run(String... args)  {
         try{
             //加载所有活动code到缓存
-            activityService.loadAllActivityCode();
+            //activityService.loadAllActivityCode();
         }catch (Exception ex){
             ex.printStackTrace();
         }

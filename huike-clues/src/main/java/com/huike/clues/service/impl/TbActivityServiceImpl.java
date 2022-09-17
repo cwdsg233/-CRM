@@ -27,8 +27,8 @@ public class TbActivityServiceImpl implements ITbActivityService {
     @Autowired
     private TbActivityMapper tbActivityMapper;
 
-    @Autowired
-    private RedisCache redisCache;
+    //@Autowired
+    //private RedisCache redisCache;
 
 
     /**
@@ -75,7 +75,7 @@ public class TbActivityServiceImpl implements ITbActivityService {
         tbActivity.setCode(getCode());
         tbActivity.setStatus("2");
         int rows= tbActivityMapper.insertTbActivity(tbActivity);
-        loadAllActivityCode();
+        //loadAllActivityCode();
         return rows;
     }
 
@@ -132,11 +132,11 @@ public class TbActivityServiceImpl implements ITbActivityService {
     /**
      * 加载活动编号到缓存中
      */
-    public void loadAllActivityCode() {
+    /*public void loadAllActivityCode() {
         List<String> codeList= tbActivityMapper.selectAllCode();
         Set<String> set= new HashSet<>(codeList);
         redisCache.setCacheSet(Constants.ACT_CODE_KEY, set);
-    }
+    }*/
 
     /**
      * 生成活动编号
@@ -144,12 +144,14 @@ public class TbActivityServiceImpl implements ITbActivityService {
      */
     private String getCode(){
         //随机8位编码
-        String code= StringUtils.getRandom(8);
+        //String code= StringUtils.getRandom(8);
+        String code = UUIDUtils.getUUID();
+
         //店铺校验
-        Set<String> codeSets =  redisCache.getCacheSet(Constants.ACT_CODE_KEY);
-        if(codeSets.contains(code)){
-            return getCode();
-        }
+        //Set<String> codeSets =  redisCache.getCacheSet(Constants.ACT_CODE_KEY);
+        //if(codeSets.contains(code)){
+        //    return getCode();
+        //}
         return code;
     }
 }

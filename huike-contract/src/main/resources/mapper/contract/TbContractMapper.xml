@@ -180,20 +180,11 @@
         GROUP BY dd;
     </select>
 
-
-
-    <select id="chanelStatistics"
+    <!--学科统计-->
+    <select id="subjectStatistics"
             resultType="java.util.Map">
-        SELECT count(1) as num, channel from tb_contract
-        <where>
-            <if test="beginCreateTime != null and beginCreateTime != ''"><!-- 开始创建时间 -->
-                and date_format(create_time,'%y-%m-%d') &gt;= date_format(#{beginCreateTime},'%y-%m-%d')
-            </if>
-            <if test="endCreateTime != null and endCreateTime != ''"><!--  -->
-                and date_format(create_time,'%y-%m-%d') &lt;= date_format(#{endCreateTime},'%y-%m-%d')
-            </if>
-        </where>
-        GROUP BY channel;
+        SELECT count(1) as num,subject from tb_contract
+        WHERE create_time BETWEEN #{beginCreateTime} AND #{endCreateTime} GROUP BY subject
     </select>
 
     <select id="activityStatistics"

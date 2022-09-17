@@ -45,7 +45,15 @@ public interface TbClueMapper {
     public List<TbClue> selectTbClueForReport(TbClue tbClue);
 
 
-    public List<TbClue> selectTbCluePoll(TbClue tbClue);
+     List<TbClue> selectTbCluePoll(TbClue tbClue);
+
+    /**
+     * 统计分析--线索统计--新增线索数量折线图
+     * @param beginCreateTime
+     * @param endCreateTime
+     * @return
+     */
+    public List<Map<String,Object>> cluesStatistics(@Param("beginCreateTime") String beginCreateTime, @Param("endCreateTime") String endCreateTime);
 
     /**
      * 新增线索管理

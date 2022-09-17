@@ -65,5 +65,5 @@ public interface ITbActivityService
 
     public Map getCountByStatus();
 
-    void loadAllActivityCode();
+    //void loadAllActivityCode();
 }

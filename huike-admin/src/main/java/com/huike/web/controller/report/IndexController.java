@@ -29,4 +29,20 @@ public class IndexController {
                                   @RequestParam("endCreateTime") String endCreateTime){
         return AjaxResult.success(reportService.getBaseInfo(beginCreateTime,endCreateTime));
     }
+
+    /**
+     * 首页--今日简报
+     * @return
+     */
+    @GetMapping("/getTodayInfo")
+    public AjaxResult getTodayInfo(){
+        return AjaxResult.success(reportService.getTodayInfo());
+    }
+
+    //首页--待办数据统计接口
+    @GetMapping("/getTodoInfo")
+    public AjaxResult getTodoInfo(@RequestParam("beginCreateTime") String beginCreateTime,
+                                  @RequestParam("endCreateTime") String endCreateTime){
+        return AjaxResult.success(reportService.getTodoInfo(beginCreateTime,endCreateTime));
+    }
 }

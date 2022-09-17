@@ -38,6 +38,13 @@ public interface IReportService {
     public LineChartVO salesStatistics(String beginCreateTime, String endCreateTime);
 
 
+    /**
+     * 学科分布统计
+     * @param beginCreateTime
+     * @param endCreateTime
+     * @return
+     */
+    public List<Map<String, Object>> subjectStatistics(String beginCreateTime, String endCreateTime);
 
     /**
      * 销售统计部门报表
@@ -86,6 +93,14 @@ public interface IReportService {
     public List<TbClue> cluesStatisticsList(TbClue clue);
 
     /**
+     * 线索统计
+     * @param beginCreateTime
+     * @param endCreateTime
+     * @return
+     */
+    public LineChartVO cluesStatistics(String beginCreateTime, String endCreateTime);
+
+    /**
      * 活动渠道统计
      * @param activity
      * @return
@@ -107,5 +122,15 @@ public interface IReportService {
      */
     IndexBaseInfoVO getBaseInfo(String beginCreateTime, String endCreateTime);
 
+    /**
+     * 首页今日简报数据展示
+     * @return
+     */
+    IndexTodayInfoVO getTodayInfo();
 
+    /**
+     * 首页--待办数据统计接口
+     * @return
+     */
+    IndexTodoInfoVO getTodoInfo(String beginCreateTime, String endCreateTime);
 }

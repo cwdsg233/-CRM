@@ -56,6 +56,13 @@
     </select>
 
 
+    <select id="cluesStatistics"
+            resultType="java.util.Map">
+        SELECT count(*) as num,DATE_FORMAT(create_time,'%Y-%m-%d') dd from tb_clue
+        where date_format(create_time,'%Y-%m-%d')  between #{beginCreateTime} and #{endCreateTime}
+        GROUP BY dd
+    </select>
+
     <resultMap type="TbClue" id="TbClueAssignResult">
         <result property="id"    column="id"    />
         <result property="name"    column="name"    />
