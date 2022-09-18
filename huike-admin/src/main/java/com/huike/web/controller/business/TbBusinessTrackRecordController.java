@@ -41,7 +41,7 @@ public class TbBusinessTrackRecordController extends BaseController {
     private ISysDictDataService sysDictDataService;
 
     /**
-     * 查询商机跟进记录列表
+     * 查询商机跟进记录列表2
      */
     @PreAuthorize("@ss.hasPermi('business:record:list')")
     @GetMapping("/list")
