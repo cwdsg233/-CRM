@@ -27,7 +27,7 @@ import java.util.List;
 public class TbClueTrackRecordController extends BaseController {
 
     /**
-     * 查询线索跟进记录列表
+     * 查询线索跟进记录列表222
      */
     @PreAuthorize("@ss.hasPermi('clues:record:list')")
     @GetMapping("/list")
