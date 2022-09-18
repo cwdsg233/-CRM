@@ -32,7 +32,7 @@ public class TbClueTrackRecordController extends BaseController {
     private ITbClueTrackRecordService iTbClueTrackRecordService;
 
     /**
-     * 查询线索跟进记录列表
+     * 查询线索跟进记录列表222
      */
     @PreAuthorize("@ss.hasPermi('clues:record:list')")
     @GetMapping("/list")
