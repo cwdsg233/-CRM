@@ -44,7 +44,7 @@ public class ExcelListener extends AnalysisEventListener<TbClueExcelVo> {
 	@Override
 	public void invoke(TbClueExcelVo data, AnalysisContext context) {
 		ImportResultDTO addTbClue = clueService.importCluesData(data);
-		resultDTO.addAll(addTbClue);
+		resultDTO. addAll(addTbClue);
 	}
 
 	/**

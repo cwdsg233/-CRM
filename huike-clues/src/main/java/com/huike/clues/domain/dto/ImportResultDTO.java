@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 public class ImportResultDTO {
 
     //成功数量
-    private Integer successNum;
+    private Integer successNum=0;
 
     //失败数量
-    private Integer failureNum;
+    private Integer failureNum=0;
 
     /**
      * 提供静态方法，发生插入失败的时候记录

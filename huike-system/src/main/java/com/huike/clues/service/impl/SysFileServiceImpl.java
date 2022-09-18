@@ -10,6 +10,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import io.minio.*;
+import io.minio.errors.MinioException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -57,11 +58,35 @@ public class SysFileServiceImpl implements ISysFileService{
 			 * 如果上述思路你无法理解，那么就直接存放在桶内生成uuid+.pdf即可
 			 * 即：huike-crm/uuid.pdf
 			 */
+
+			//判断文件存储的桶是否存在
+			boolean found = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
+			if (!found) {
+				//如果桶不存在则创建“huike-crm”的新桶
+				minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
+			}
+			//操作文件
+			String fileName = file.getOriginalFilename();
+			String objectName = new SimpleDateFormat("yyyy/MM/dd/").format(new Date()) + UUID.randomUUID().toString().replaceAll("-", "")
+					+ fileName.substring(fileName.lastIndexOf("."));
+
+			//文件上传
+			//由于使用的是SpringBoot与之进行集成 上传的时候拿到的是MultipartFile 需要通过输入输出流的方式进行添加
+			PutObjectArgs objectArgs = PutObjectArgs.builder().object(objectName)
+					.bucket(bucketName)
+					.contentType(file.getContentType())
+					.stream(file.getInputStream(),file.getSize(),-1).build();
+			minioClient.putObject(objectArgs);
+
 			//TODO 基于上述逻辑补全代码
 			/**
 			 * 构建返回结果集
 			 */
+			//封装访问的url给前端
 			AjaxResult ajax = AjaxResult.success();
+			ajax.put("fileName", "/"+bucketName+"/"+objectName);
+			//url需要进行截取
+			ajax.put("url", "http://"+minioConfig.getEndpoint()+":"+ minioConfig.getPort()+"/"+ minioConfig.getBucketName()+"/"+objectName);
 			/**
 			 * 封装需要的数据进行返回
 			 */
@@ -80,6 +105,7 @@ public class SysFileServiceImpl implements ISysFileService{
 			}
 		}
 	}
+
 
 
 	/**
